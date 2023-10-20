@@ -8,7 +8,7 @@
 //#include "../empyrical/empyrical.h"
 
 arrow::Status RunMain(){
-    
+    auto start_time = std::chrono::high_resolution_clock::now();
     // 首先，我们需要设置一个可读文件对象，它允许我们将读取器指向磁盘上的正确数据。我们将重复使用这个对象，并将其重新绑定到多个文件中。
     std::shared_ptr<arrow::io::ReadableFile> infile;
     // 绑定输入文件到 "test_in.csv"
@@ -65,7 +65,7 @@ arrow::Status RunMain(){
     // std::cout << DAILY << std::endl;
 
     // 计算收益率
-    auto start_time = std::chrono::high_resolution_clock::now();
+    
     arrow::Datum fund_returns;
     arrow::Datum fund_diff;
     std::shared_ptr<arrow::ChunkedArray> cum_nav = csv_table->GetColumnByName("复权净值");
@@ -103,12 +103,12 @@ arrow::Status RunMain(){
     ARROW_ASSIGN_OR_RAISE(sharpe_ratio, arrow::compute::CallFunction(
                                           "multiply", {daily_sharpe_ratio,sqrt_year}));
     
-    std::cout << "计算得到的夏普率为 : " << sharpe_ratio.scalar_as<arrow::DoubleScalar>().value << std::endl;
+    std::cout << "the result of sharpe ratio : " << sharpe_ratio.scalar_as<arrow::DoubleScalar>().value << std::endl;
 
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
 
-    std::cout << "c++读取数据,然后计算夏普率一共耗费时间为: " << duration.count()/1000.0 << " ms" << std::endl;
+    std::cout << "the consume time of arrow read data and caculate the sharpe_ratio: " << duration.count()/1000.0 << " ms" << std::endl;
 
     return arrow::Status::OK();
   }

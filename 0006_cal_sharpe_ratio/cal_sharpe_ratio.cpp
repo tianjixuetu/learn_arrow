@@ -79,11 +79,11 @@ int main() {
     // std::cout << "std_deviation " << std_deviation << std::endl;
     // std::cout << "sqrt_trading_days_per_year " << sqrt_trading_days_per_year << std::endl;
 
-    std::cout << "计算得到的夏普率为: " << sharpe_ratio << std::endl;
+    std::cout << "the result of sharpe ratio : " << sharpe_ratio << std::endl;
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
 
-    std::cout << "c++读取数据,然后计算夏普率一共耗费时间为: " << duration.count()/1000.0 << " ms" << std::endl;
+    std::cout << "the consume time of pure c++ read data and caculate the sharpe_ratio: " << duration.count()/1000.0 << " ms" << std::endl;
 
     return 0;
 }
