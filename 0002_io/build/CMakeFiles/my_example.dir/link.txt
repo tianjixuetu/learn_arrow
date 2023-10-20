@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/my_example.dir/my_example.cc.o -o my_example  -Wl,-rpath,/home/yun/anaconda3/lib /home/yun/anaconda3/lib/libparquet.so.1100.0.0 /home/yun/anaconda3/lib/libarrow.so.1100.0.0 
